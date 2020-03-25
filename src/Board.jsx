@@ -9,15 +9,19 @@ import { StatusContext } from "./StatusContext";
 //the board componant will be the whole board which will have each box as a componant
 
 const Board = () => {
-  //our initial Array of nulls
-  const [boardSquare, setBoardSquare] = useState(Array(9).fill(null));
-  //create a winning or Draw state
-
-  // const [drawState, setDrawState] = useState(false);
-
   const { bool, player, setPlayer, winState, setWinState } = React.useContext(
     StatusContext
   );
+  //our initial Array of nulls
+  const [boardSquare, setBoardSquare] = useState(Array(9).fill(null));
+  //we need a state that tracks who is human and who is computer
+
+
+
+  //once player is record either Xor 0  we need to change the variable from book to playerChoice
+  // we must then also let the computer be the opposite to inject its opposite into the board
+
+  // const [drawState, setDrawState] = useState(false);
 
   useEffect(() => {
     const WINNING_COMBINATIONS = [
@@ -52,8 +56,9 @@ const Board = () => {
     //copy the board to able to mutate it
     let copyBoard = [...boardSquare];
     //assigning X or O only if previous value is null. To avoid overriding value
-    if (copyBoard[index] === null) {
+    if (copyBoard[index] === null && winState === false) {
       copyBoard[index] = bool;
+
       setPlayer(!player);
     }
     //changing the origanl state (array) with the mutate version
@@ -94,7 +99,5 @@ const StyledDiv = styled.div`
     font-size: 2rem;
     height: 130px;
     width: 230px;
-    
-    
   }
 `;

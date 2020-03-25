@@ -2,10 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 const Square = ({ value, squareIndex, clickHandler }) => {
+  console.log(squareIndex);
   return (
     <>
       <Container>
         <StyledButtons
+          className={`btn${squareIndex}`}
           onClick={() => {
             clickHandler(squareIndex);
           }}
@@ -27,13 +29,18 @@ const StyledButtons = styled.button`
   font-weight: bold;
   font-family: "Indie Flower", cursive;
   cursor: pointer;
-
+  border: solid black 1px;
   background-color: transparent;
+
+  /* ${props => {
+    console.log(props);
+  }} */
 
   &:hover {
     cursor: pointer;
     color: #666;
   }
+
   @media (max-width: 500px) {
     font-size: 2rem;
     height: 75px;

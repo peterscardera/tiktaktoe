@@ -7,15 +7,14 @@ import { IoIosArrowBack } from "react-icons/io";
 import { StatusContext } from "./StatusContext";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import GlobalStyles from "./GlobalStyles"
-
+import GlobalStyles from "./GlobalStyles";
 
 function App() {
-  const { winState, setWinState } = React.useContext(StatusContext)
+  const { winState, setWinState } = React.useContext(StatusContext);
   return (
     <Router>
-      <GlobalStyles/>
-      
+      <GlobalStyles />
+
       <Switch>
         <Route exact path="/">
           <HomeContainer>
@@ -25,12 +24,21 @@ function App() {
         <Route exact path="/game">
           <GameContainer>
             <StyledLink to="/">
-              <StyledBack onClick={()=> {setWinState(!winState)}} GameStatus={winState} > <IoIosArrowBack/> Back to Player Select </StyledBack>
+              <StyledBack
+                onClick={() => {
+                  setWinState(!winState);
+                }}
+                GameStatus={winState}
+              >
+                <IoIosArrowBack /> Back to Player Select
+              </StyledBack>
             </StyledLink>
 
             <Title> Tik Tac Toe</Title>
             <Board></Board>
-            <PlayerTurn></PlayerTurn>
+            <StyledTurn GameStatus={winState}>
+              <PlayerTurn></PlayerTurn>
+            </StyledTurn>
           </GameContainer>
         </Route>
       </Switch>
@@ -44,9 +52,10 @@ const GameContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height:100vh;
+  height: 100vh;
   align-items: center;
-  background-image: url("../simple.jpeg");
+  background-color: lightgray
+  
 `;
 
 const Title = styled.div`
@@ -56,19 +65,23 @@ const Title = styled.div`
 `;
 
 const HomeContainer = styled.div`
-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+`;
 
 const StyledBack = styled.div`
-display: flex;
-color: yellow;
-${prop => (prop.GameStatus ? `display:inline`: `display:none`)};
+  display: flex;
+  color: yellow;
+  ${prop => (prop.GameStatus ? `display:inline` : `display:none`)};
 `;
 
 const StyledLink = styled(Link)`
-text-decoration: none;
-`
+  text-decoration: none;
+`;
 
+const StyledTurn = styled.div`
+${prop => (prop.GameStatus ? `display: none`: `display: inline` ) }
+`;
