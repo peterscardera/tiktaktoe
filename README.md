@@ -6,3 +6,5 @@ Available at => https://master.d1x3bxty36i3kg.amplifyapp.com/
 
 ## 
 One of my early react practice challenges 
+
+<img src="./public/home.png" />
